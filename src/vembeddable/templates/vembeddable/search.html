@@ -1,11 +1,24 @@
-<h1>vE</h1>
+{% load static %}
+{% load compress %}
+<!DOCTYPE html>
+<html>
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'vembeddable/css/search.scss' %}" type="text/x-scss">
+    {% endcompress %}
+<head>
 
-{% for item in youtube_api_response.items %}
-<div>
-    <img src="{{ item.snippet.thumbnails.medium.url }}">
-    <h4>{{ item.snippet.title }}</h3>
-    <p>{{ item.snippet.channelTitle }} | {{ item.snippet.publishTime }}</p>
-    <p>{{ item.snippet.description }}</p>
-    <p>{{ item.id.videoId }}</p>
-</div>
-{% endfor %}
+</head>
+<body>
+    <h1>vE</h1>
+
+    {% for item in youtube_api_response.items %}
+    <div>
+        <img src="{{ item.snippet.thumbnails.medium.url }}">
+        <h4>{{ item.snippet.title }}</h3>
+        <p>{{ item.snippet.channelTitle }} | {{ item.snippet.publishTime }}</p>
+        <p>{{ item.snippet.description }}</p>
+        <p>{{ item.id.videoId }}</p>
+    </div>
+    {% endfor %}
+</body>
+</html>

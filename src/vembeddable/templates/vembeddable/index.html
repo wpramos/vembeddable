@@ -1,3 +1,16 @@
-<form action="{% url 'search' %}">
-    <input type="text" name="q" placeholder="Search">
-</form>
+{% load static %}
+{% load compress %}
+<!DOCTYPE html>
+<html>
+    {% compress css %}
+    <link rel="stylesheet" href="{% static 'vembeddable/css/index.scss' %}" type="text/x-scss">
+    {% endcompress %}
+<head>
+
+</head>
+<body>
+    <form action="{% url 'search' %}">
+        <input type="text" name="q" placeholder="Search">
+    </form>
+</body>
+</html>
