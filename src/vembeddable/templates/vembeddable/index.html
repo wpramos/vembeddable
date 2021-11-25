@@ -2,6 +2,10 @@
 {% load compress %}
 <!DOCTYPE html>
 <html>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     {% compress css %}
     <link rel="stylesheet" href="{% static 'vembeddable/css/index.scss' %}" type="text/x-scss">
     {% endcompress %}
@@ -9,8 +13,11 @@
 
 </head>
 <body>
-    <form action="{% url 'search' %}">
-        <input type="text" name="q" placeholder="Search">
-    </form>
+    <div class="container">
+        <form action="{% url 'search' %}">
+            <input type="text" name="q" placeholder="Search YouTube">
+            <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+    </div><!--END OF CONTAINER-->
 </body>
 </html>

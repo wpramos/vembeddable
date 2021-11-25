@@ -5,6 +5,10 @@ $light-color: #ffffff;
 $spacing: 10px;
 $radius: 2.5px;
 
+html, body {
+    height: 100%;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     background-color: $theme-color;
