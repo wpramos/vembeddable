@@ -1,0 +1,67 @@
+@import 'base.scss';
+
+nav {
+    margin: $spacing 0;
+
+    a {
+        color: $dark-color;
+    }
+}
+
+#videoItemPanel {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: $spacing * 2;
+}
+
+.video-item {
+    display: flex;
+    flex-direction: column;
+
+    background-color: $theme-color;
+    color: $dark-color;
+    border-radius: $radius;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    overflow: hidden;
+
+    .video-thumbnail {
+        img {
+            display: block; // TO FIX TRAINLING WHITESPACE CAUSED BY INLINE ELEMENT
+            width: 100%;
+        }
+    }
+
+    .video-info {
+        flex: 1;
+
+        padding: 0 $spacing;
+
+        background-color: $light-color;
+        border-radius: 0 0 10px 10px;
+
+        .video-publish-time, .video-description {
+            font-size: 0.85em;
+        }
+    }
+
+    .clipboard-panel {
+        display: flex;
+        padding: 0 $spacing;
+
+        .video-link {
+            flex: 1;
+
+            color: $dark-color;
+            font-size: 0.85em;
+            transition: opacity 500ms;
+        }
+
+        .clipboard-icon {
+            cursor: pointer;
+
+            &:active {
+                opacity: 0.25;
+            }
+        }
+    }
+}

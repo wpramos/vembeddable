@@ -3,6 +3,9 @@
 {% load vembeddable_extras %}
 <!DOCTYPE html>
 <html>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     {% compress css %}
     <link rel="stylesheet" href="{% static 'vembeddable/css/search.scss' %}" type="text/x-scss">
     {% endcompress %}
@@ -10,16 +13,42 @@
 
 </head>
 <body>
-    <h1>vE</h1>
+    <div class="container">
+    <nav><a href="{% url 'index' %}"><i class="fa fa-2x fa-home"></i></a></nav>
 
+    <div id="videoItemPanel">
     {% for item in youtube_api_response.items %}
-    <div>
-        <img src="{{ item.snippet.thumbnails.medium.url }}">
-        <h4>{{ item.snippet.title }}</h3>
-        <p>{{ item.snippet.channelTitle }} | {{ item.snippet.publishTime|time_since }}</p>
-        <p>{{ item.snippet.description }}</p>
-        <p>{{ item.id.videoId }}</p>
-    </div>
+        <div class="video-item">
+            <div class="video-thumbnail">
+                <img src="{{ item.snippet.thumbnails.medium.url }}" alt="Preview image for video">
+            </div>
+            <div class="video-info">
+                <h4>{{ item.snippet.title }}</h4>
+                <p><span class="channel-title">{{ item.snippet.channelTitle }}</span> | <span class="video-publish-time">{{ item.snippet.publishTime|time_since }}</span></p>
+                <p class="video-description">{{ item.snippet.description }}</p>
+            </div>
+            <div class="clipboard-panel">
+                <p class="video-link">https://youtu.be/{{ item.id.videoId }}</p>
+                <p class="clipboard-icon" onclick="copyLink(this)" title="copy_link"><i class="fa fa-clipboard"></i></p>
+            </div>
+        </div>
     {% endfor %}
+    </div>
+    </div> <!-- END OF CONTAINER -->
+
+    <script>
+        function copyLink(element) {
+            var videoLinkElement = element.parentElement.children[0]
+            var videoLink = videoLinkElement.innerHTML;
+
+            navigator.clipboard.writeText(videoLink)
+
+            videoLinkElement.style.opacity = "0.25";
+
+            setTimeout(function () {
+                videoLinkElement.style.opacity = "1";
+            }, 750);
+        }
+    </script>
 </body>
 </html>
