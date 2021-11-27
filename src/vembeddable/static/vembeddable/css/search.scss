@@ -10,8 +10,8 @@ nav {
 
 #videoItemPanel {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: $spacing * 2;
+    grid-template-columns: repeat(1, 1fr);
+    gap: $spacing;
 }
 
 .video-item {
@@ -27,7 +27,9 @@ nav {
     .video-thumbnail {
         img {
             display: block; // TO FIX TRAINLING WHITESPACE CAUSED BY INLINE ELEMENT
+
             width: 100%;
+            margin: -10% 0; // TO HIDE BLACK BARS ABOVE & BELOW HIGH RES THUMBNAIL
         }
     }
 
@@ -63,5 +65,29 @@ nav {
                 opacity: 0.25;
             }
         }
+    }
+}
+
+@media (min-width: 576px) {
+    #videoItemPanel {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 864px) {
+    #videoItemPanel {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 1152px) {
+    #videoItemPanel {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1440px) {
+    #videoItemPanel {
+        grid-template-columns: repeat(5, 1fr);
     }
 }

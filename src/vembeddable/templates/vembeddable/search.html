@@ -21,7 +21,7 @@
     {% for item in youtube_api_response.items %}
         <div class="video-item">
             <div class="video-thumbnail">
-                <img src="{{ item.snippet.thumbnails.medium.url }}" alt="Preview image for video">
+                <img src="{{ item.snippet.thumbnails.high.url }}" alt="Preview image for video">
             </div>
             <div class="video-info">
                 <h4>{{ item.snippet.title }}</h4>

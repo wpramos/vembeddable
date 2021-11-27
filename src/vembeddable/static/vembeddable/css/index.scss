@@ -32,3 +32,10 @@ form {
         cursor: pointer;
     }
 }
+
+@media (min-width: 576px) {
+    form {
+        width: 556px;
+        margin: 0 auto;
+    }
+}
