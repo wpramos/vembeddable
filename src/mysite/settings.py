@@ -25,9 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ['VEMBEDDABLE_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = os.environ['VEMBEDDABLE_ALLOWED_HOSTS'].split(',')
 
 
 # Application definition
@@ -145,3 +146,10 @@ COMPRESS_PRECOMPILERS = (
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# If DJANGO_DEVELOPMENT environment variable is set, the development
+# settings that are required are imported from module 'settings_dev',
+# to override production settings
+
+if os.environ.get('DJANGO_DEVELOPMENT'):
+    from .settings_dev import DEBUG
