@@ -2,6 +2,8 @@
 {% load compress %}
 <!DOCTYPE html>
 <html>
+    <title>vEmbeddable</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css" integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
@@ -9,6 +11,7 @@
     {% compress css %}
     <link rel="stylesheet" href="{% static 'vembeddable/css/index.scss' %}" type="text/x-scss">
     {% endcompress %}
+    <link rel="icon" href="{% static 'vembeddable/img/favicon.png' %}" type="image/png">
 <head>
 
 </head>

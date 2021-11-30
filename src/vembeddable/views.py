@@ -35,6 +35,7 @@ def search(request):
     youtube_api_response = youtube_api_request.execute()
 
     context = {
+        'query': query,
         'youtube_api_response': youtube_api_response,
     }
 
