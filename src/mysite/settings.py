@@ -142,7 +142,7 @@ STATICFILES_FINDERS = [
 # django-compressor Settings
 # The compressor uses django-libsass to pre-compile SCSS to CSS
 
-# COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE = True
 
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
