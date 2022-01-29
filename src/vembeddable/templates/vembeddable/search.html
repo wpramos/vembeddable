@@ -27,14 +27,18 @@
                 <img src="{{ item.snippet.thumbnails.high.url }}" alt="Preview image for video">
             </div>
             <div class="video-info">
+                {% autoescape off %}
                 <h4>{{ item.snippet.title }}</h4>
+                {% endautoescape %}
                 <p><span class="channel-title">{{ item.snippet.channelTitle }}</span> | <span class="video-publish-time">{{ item.snippet.publishTime|time_since }}</span></p>
                 <p class="video-description">{{ item.snippet.description }}</p>
             </div>
             <div class="clipboard-panel">
                 <p class="video-link">https://youtu.be/{{ item.id.videoId }}</p>
+                <p class="verify-button" onclick="isEmbeddable(this)" videoID="{{ item.id.videoId }}">verify</p>
                 <p class="clipboard-icon" onclick="copyLink(this)" title="copy_link"><i class="fa fa-clipboard"></i></p>
             </div>
+            <div class="error-message-panel"></div>
         </div>
     {% endfor %}
     </div>
@@ -52,6 +56,41 @@
             setTimeout(function () {
                 videoLinkElement.style.opacity = "1";
             }, 750);
+        }
+
+        function isEmbeddable(element) {
+            var videoID = element.getAttribute("videoID");
+            console.log("videoID: " + videoID);
+
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log("responseText: " + this.responseText);
+
+                    var videoItem = element.parentElement.parentElement
+
+                    if (this.responseText == "isError") {
+                        var errorMessagePanel = videoItem.getElementsByClassName("error-message-panel")[0];
+
+                        var errorMessage = document.createElement("p");
+                        errorMessage.innerHTML = "This video is not embeddable.";
+                        errorMessagePanel.appendChild(errorMessage);
+
+                        errorMessagePanel.style.height = "100%";
+                        errorMessagePanel.style.opacity = "1";
+                    }
+                    else {
+                        videoItem.classList.add("verified");
+
+                        element.style.display = "none";
+
+                        var clipboardIcon = element.nextElementSibling;
+                        clipboardIcon.style.display = "block";
+                    }
+                }
+            };
+            xhttp.open("GET", "{% url 'verify' 'videoID' %}".replace("videoID", videoID) , true);
+            xhttp.send();
         }
     </script>
 </body>

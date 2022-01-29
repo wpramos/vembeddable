@@ -17,12 +17,14 @@ nav {
 .video-item {
     display: flex;
     flex-direction: column;
+    position: relative; // TO ABSOLUTELY POSITION 'error-message-panel' ELEMENT
 
     background-color: $theme-color;
     color: $dark-color;
     border-radius: $radius;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     overflow: hidden;
+    transition: background-color 1s, color 1s;
 
     .video-thumbnail {
         img {
@@ -48,22 +50,55 @@ nav {
 
     .clipboard-panel {
         display: flex;
+        align-items: center;
         padding: 0 $spacing;
 
         .video-link {
             flex: 1;
 
-            color: $dark-color;
             font-size: 0.85em;
             transition: opacity 500ms;
         }
 
+        .verify-button {
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
         .clipboard-icon {
+            display: none;
             cursor: pointer;
 
             &:active {
                 opacity: 0.25;
             }
+        }
+    }
+
+    .error-message-panel {
+        display: flex;
+        align-items: center;
+        position: absolute;
+        height: 0;
+        width: 100%;
+
+        background-color: red;
+        color: $light-color;
+        opacity: 0;
+        transition: opacity 1s;
+
+        p {
+            box-sizing: border-box;
+            width: 100%;
+            padding: $spacing;
+        }
+    }
+
+    &.verified {
+        background-color: red;
+
+        .clipboard-panel {
+            color: $light-color;
         }
     }
 }

@@ -1,8 +1,18 @@
+from django.http.response import HttpResponse
+
+import logging
+
 import os
+
+import requests
 
 from django.shortcuts import render
 
 from googleapiclient.discovery import build
+
+logging.basicConfig(
+    level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s',
+)
 
 # Create your views here.
 
@@ -40,3 +50,19 @@ def search(request):
     }
 
     return render(request, 'vembeddable/search.html', context)
+
+
+def verify(request, video_id):
+    response = requests.get('https://www.youtube.com/embed/' + video_id)
+
+    # 'error_element' is a sequence of text, the presence of which in
+    # the HTTP response to the above request implies that the video will
+    # not play on the embedded player.
+    error_element = '<meta name="robots" content="noindex">'
+
+    if error_element in response.text:
+        response_text = 'isError'
+    else:
+        response_text = ''
+
+    return HttpResponse(response_text)
